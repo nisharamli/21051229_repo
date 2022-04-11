@@ -1,17 +1,17 @@
 pipeline {
       agent any
       stages {
-          stage('One') {
+          stage('21051229 Stage One') {
           steps {
-            echo 'Begin of Pipeline: Stage one completes'
+            echo '21051229 Start of Pipeline'
           }
           }
-          stage('Two') {
+          stage('21051229 Stage Two') {
           steps {
-            input('Do you want to update to Development container?')
+            input('Push changes to Production?')
           }
           }
-          stage('Three') {
+          stage('21051229 Stage Three') {
           when {
                 not {
                     branch "Development NOT updated"
@@ -19,39 +19,23 @@ pipeline {
           }
           steps {
                  sh '''#!/bin/bash
-                 targets=puppetclient1;
-                 locate_script='/testdir/work/devops_repo/script_to_run';
+                 targets=websvr_21051229;
+                 locate_script='/21051229/script_dir/21051229_repo/script_to_run';
                  docker cp $locate_script $targets://$locate_script;
                  bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
                  '''
-                 echo "Development container updated"
+                 echo "Stage 3 Completed - 21051229"
           }
           }
-          stage('Four') {
+          stage('21051229 Stage Four') {
           steps {
-            input('Do you want to update to Production container: Proceed to Production')
+            echo 'Production website tested working'
                 
           }
           }
-          stage('Five') {
-          when {
-                not {
-                    branch "Production NOT updated"
-                }
-          }
+          stage('21051229 Stage Five') {
           steps {
-                 sh '''#!/bin/bash
-                 targets=puppetclient2;
-                 locate_script='/testdir/work/devops_repo/script_to_run';
-                 docker cp $locate_script $targets://$locate_script;
-                 bolt script run $locate_script -t $targets -u clientadm -p user123 --no-host-key-check --run-as root;
-                 '''
-                 echo "Production container updated"
-          }
-          }
-          stage('Completed updating Operation') {
-          steps {
-            echo 'Completed updating to Production Container'
+            echo 'Production website is updated successfully'
           }
           }
       }
