@@ -8,5 +8,5 @@ puppet resource file /script_dir ensure=directory
 puppet resource file /script_dir/clone ensure=directory
 cd /script_dir/clone
 git clone https://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@github.com/nisharamli/operate_repo.git
-cp -p /21051229/script_dir/operate_repo/index.html /var/www/html
+cp -p /21051229/script_dir/operate_repo/index.html /var/www/html/index.html
 
